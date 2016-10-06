@@ -36,11 +36,15 @@ public class MainActivityVM extends GitsVM{
                 }else if(hasilType.equals("op")){
                     observableString.setValue(observableString.getValue()+hasilID);
                 }else if(hasilType.equals("clear")){
-
+                    observableString.setValue("");
                 }else if(hasilType.equals("his")){
 
                 }else if(hasilType.equals("del")){
-
+                    String input = observableString.getValue();
+                    if(input.length()>0 && input != null){
+                        input.substring(0,input.length()-1);
+                    }
+                    observableString.setValue(input);
                 }else if(hasilType.equals("res")){
 
                 }
