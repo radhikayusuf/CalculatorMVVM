@@ -33,7 +33,7 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_visible="@{vm.obs.isGone?true:false}">
+            app:layout_visible="@{vm.obs.isGone?false:true}">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

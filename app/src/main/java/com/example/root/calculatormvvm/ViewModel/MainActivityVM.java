@@ -82,12 +82,16 @@ public class MainActivityVM extends GitsVM{
                         obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
                 }else if(hasilType.equals("res")){
                     if(!operation.isEmpty()){
+                        if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == '*' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
+                            obs.setValue(obs.getValue().substring(0,obs.getValue().length() -1));
+                            operation ="";
+                        }else{
                         hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
                         obs.setValue(String.valueOf(hasilAkhir));
                         op = true;
-                    }else if(obs.getValue().charAt(obs.getValue().length()) == '+' || obs.getValue().charAt(obs.getValue().length()) == '-' || obs.getValue().charAt(obs.getValue().length()) == '*' || obs.getValue().charAt(obs.getValue().length()) == '/'){
-                        obs.setValue(obs.getValue().substring(0,obs.getValue().length() -1));
-
+                        }
+                    }else if(obs.getValue().isEmpty()){
+                        System.out.println("Kosong");
                     }
 
                 }
