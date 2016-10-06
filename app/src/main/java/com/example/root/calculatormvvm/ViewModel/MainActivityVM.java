@@ -62,6 +62,7 @@ public class MainActivityVM extends GitsVM{
                             hasilID =".";
                         }
                     }
+                    obs.setValue(obs.getValue()+hasilID);
                 }else if(hasilType.equals("op")){
                     if(!obs.getValue().isEmpty()){
                         if(op == false){
