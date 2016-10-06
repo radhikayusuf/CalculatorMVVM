@@ -56,7 +56,7 @@ public class MainActivityVM extends GitsVM{
                     if(hasilID.equalsIgnoreCase(".")){
                         if(!obs.getValue().isEmpty() && obs.getValue().charAt(obs.getValue().length()-1) == '.'){
                             hasilID="";
-                        }else if(obs.getValue().toString().equalsIgnoreCase("")){
+                        }else if(obs.getValue().toString().equalsIgnoreCase("")||isOperation(obs.getValue().toString())){
                             hasilID="0.";
                         }else {
                             hasilID =".";
