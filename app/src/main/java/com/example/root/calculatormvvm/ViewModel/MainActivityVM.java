@@ -53,6 +53,15 @@ public class MainActivityVM extends GitsVM{
                 String hasilType = detectInputType.detectInputType(hasilID);
 
                 if(hasilType.equals("num")){
+                    if(hasilID.equalsIgnoreCase(".")){
+                        if(obs.getValue().charAt(obs.getValue().length()-1) == '.'){
+                            hasilID="";
+                        }else if(obs.getValue().toString().equalsIgnoreCase("")){
+                            hasilID="0.";
+                        }else {
+                            hasilID =".";
+                        }
+                    }
                     obs.setValue(obs.getValue()+hasilID);
                 }else if(hasilType.equals("op")){
                     if(!obs.getValue().isEmpty()){
