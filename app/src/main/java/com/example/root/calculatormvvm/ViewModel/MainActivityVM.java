@@ -28,19 +28,19 @@ import id.gits.mvvmcore.viewmodel.GitsVM;
  * Created by root on 06/10/16.
  */
 
-public class MainActivityVM extends GitsVM{
+public class MainActivityVM extends GitsVM {
 
     public boolean isGone = false;
     public MainActivityAdapter adapter;
     public LinearLayoutManager layoutManager;
     public Button.OnClickListener btn;
-    public ObservableString obs = new ObservableString("",false);
+    public ObservableString obs = new ObservableString("", false);
     ConvertIdtoString convertIdtoString = new ConvertIdtoString();
     DetectInputType detectInputType = new DetectInputType();
     MathOprator mo = new MathOprator();
     boolean op = true;
-    String operation = "", num_buff="", num_after="";
-    int pos_op= 0;
+    String operation = "", num_buff = "", num_after = "";
+    int pos_op = 0;
     List<HistoryDao> historyDaos = new ArrayList<>();
     double hasilAkhir = 0;
 
@@ -52,6 +52,7 @@ public class MainActivityVM extends GitsVM{
                 String hasilID = convertIdtoString.convertIdtoString(v);
                 String hasilType = detectInputType.detectInputType(hasilID);
 
+<<<<<<< Updated upstream
                 if(hasilType.equals("num")){
                     if(hasilID.equalsIgnoreCase(".")){
                         if(obs.getValue().charAt(obs.getValue().length()-1) == '.'){
@@ -66,49 +67,56 @@ public class MainActivityVM extends GitsVM{
                 }else if(hasilType.equals("op")){
                     if(!obs.getValue().isEmpty()){
                         if(op == false){
+=======
+                if (hasilType.equals("num")) {
+                    obs.setValue(obs.getValue() + hasilID);
+                } else if (hasilType.equals("op")) {
+                    if (!obs.getValue().isEmpty()) {
+                        if (op == false) {
+>>>>>>> Stashed changes
                             hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
                             obs.setValue(Result.resultToString(hasilAkhir));
                             System.out.println(historyDaos.get(0).getHistory());
                             op = true;
-                        }else{
-                            System.out.println("ini"+hasilID);
+                        } else {
+                            System.out.println("ini" + hasilID);
                             operation = hasilID;
                             num_buff = obs.getValue();
-                            obs.setValue(obs.getValue()+(hasilID.equals("*") ? "x" : hasilID));
+                            obs.setValue(obs.getValue() + (hasilID.equals("*") ? "x" : hasilID));
                             op = false;
                             pos_op = obs.getValue().length();
-                            System.out.println("check point "+hasilID+" ke "+obs.getValue().length());
+                            System.out.println("check point " + hasilID + " ke " + obs.getValue().length());
                         }
                     }
-                }else if(hasilType.equals("clear")){
-                        obs.setValue("");
+                } else if (hasilType.equals("clear")) {
+                    obs.setValue("");
+                    pos_op = 0;
+                    operation = "";
+                    op = true;
+                } else if (hasilType.equals("his")) {
+                    isGone = isGone != true ? true : false;
+                    obs.setGone(isGone);
+                } else if (hasilType.equals("chis")) {
+                    historyDaos.clear();
+                    adapter.notifyDataSetChanged();
+                } else if (hasilType.equals("del")) {
+                    if (isOperation(obs.getValue())) {
                         pos_op = 0;
                         operation = "";
                         op = true;
-                }else if(hasilType.equals("his")){
-                        isGone = isGone != true ? true : false;
-                        obs.setGone(isGone);
-                }else if(hasilType.equals("chis")){
-                        historyDaos.clear();
-                        adapter.notifyDataSetChanged();
-                }else if(hasilType.equals("del")){
-                    if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == 'x' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
-                        pos_op = 0;
-                        operation = "";
-                        op = true;
                     }
-                        obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
-                }else if(hasilType.equals("res")){
-                    if(!operation.isEmpty()){
-                        if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == 'x' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
-                            obs.setValue(obs.getValue().substring(0,obs.getValue().length() -1));
-                            operation ="";
-                        }else{
-                        hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
-                        obs.setValue(Result.resultToString(hasilAkhir));
-                        op = true;
+                    obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0, obs.getValue().length() - 1) : "");
+                } else if (hasilType.equals("res")) {
+                    if (!operation.isEmpty()) {
+                        if (isOperation(obs.getValue())) {
+                            obs.setValue(obs.getValue().substring(0, obs.getValue().length() - 1));
+                            operation = "";
+                        } else {
+                            hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
+                            obs.setValue(Result.resultToString(hasilAkhir));
+                            op = true;
                         }
-                    }else if(obs.getValue().isEmpty()){
+                    } else if (obs.getValue().isEmpty()) {
                         System.out.println("Kosong");
                     }
 
@@ -120,28 +128,28 @@ public class MainActivityVM extends GitsVM{
     }
 
 
-    public Double hitung(String o, double num1, double num2){
+    public Double hitung(String o, double num1, double num2) {
         double hasil = 0;
 
-        if (o.equals("*")){
+        if (o.equals("*")) {
             hasil = mo.oprasiKali(num1, num2);
-        }else if (o.equals("/")){
+        } else if (o.equals("/")) {
             hasil = mo.oprasiBagi(num1, num2);
-        }else if (o.equals("+")){
+        } else if (o.equals("+")) {
             hasil = mo.oprasiTambah(num1, num2);
-        }else if (o.equals("-")){
+        } else if (o.equals("-")) {
             hasil = mo.oprasiKurang(num1, num2);
         }
 
-        historyDaos.add(0, new HistoryDao(Result.resultToString(num1)+" "+(operation.equals("*") ? "x" : operation)+" "+Result.resultToString(num2)+ " = " +Result.resultToString(hasil)));
+        historyDaos.add(0, new HistoryDao(Result.resultToString(num1) + " " + (operation.equals("*") ? "x" : operation) + " " + Result.resultToString(num2) + " = " + Result.resultToString(hasil)));
         adapter.notifyDataSetChanged();
         operation = "";
         return hasil;
     }
 
     @BindingAdapter({"layout_visible"})
-    public static void onLayoutVisblityChange(RelativeLayout layout , Boolean isGone){
-        if(isGone){
+    public static void onLayoutVisblityChange(RelativeLayout layout, Boolean isGone) {
+        if (isGone) {
             /*
             layout.animate()
                 .translationY(layout.getHeight())
@@ -156,8 +164,17 @@ public class MainActivityVM extends GitsVM{
                     });
                     */
             layout.setVisibility(View.GONE);
-        }else {
+        } else {
             layout.setVisibility(View.VISIBLE);
         }
     }
+
+    public Boolean isOperation(String value) {
+        if (value.charAt(obs.getValue().length() - 1) == '+' || value.charAt(obs.getValue().length() - 1) == '-' || value.charAt(obs.getValue().length() - 1) == 'x' || value.charAt(obs.getValue().length() - 1) == '/') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
