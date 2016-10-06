@@ -5,6 +5,9 @@
         <import type="android.view.View"/>
 
         <variable
+            name="os"
+            type="com.example.root.calculatormvvm.ObservableString"/>
+        <variable
             name="vm"
             type="com.example.root.calculatormvvm.ViewModel.MainActivityVM"/>
     </data>
