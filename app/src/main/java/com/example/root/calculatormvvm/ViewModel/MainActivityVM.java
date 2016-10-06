@@ -1,9 +1,11 @@
 package com.example.root.calculatormvvm.ViewModel;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.root.calculatormvvm.Adapter.MainActivityAdapter;
 import com.example.root.calculatormvvm.Dao.HistoryDao;
 import com.example.root.calculatormvvm.Function.ConvertIdtoString;
 import com.example.root.calculatormvvm.Function.DetectInputType;
@@ -22,6 +24,8 @@ import id.gits.mvvmcore.viewmodel.GitsVM;
 
 public class MainActivityVM extends GitsVM{
 
+    public MainActivityAdapter adapter;
+    public LinearLayoutManager layoutManager;
     public Button.OnClickListener btn;
     public ObservableString obs = new ObservableString("");
     ConvertIdtoString convertIdtoString = new ConvertIdtoString();
@@ -68,5 +72,7 @@ public class MainActivityVM extends GitsVM{
                 }
             }
         };
+        adapter = new MainActivityAdapter(historyDaos);
+        layoutManager = new LinearLayoutManager(context);
     }
 }
