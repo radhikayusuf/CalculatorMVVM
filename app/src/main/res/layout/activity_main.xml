@@ -19,18 +19,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <android.support.v7.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layoutManager="@{vm.layoutManager}"
-        app:adapter="@{vm.adapter}"/>
+        android:layout_weight="1">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="@{vm.layoutManager}"
+            app:adapter="@{vm.adapter}"/>
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnClearHis"
+                    android:onClick="@{vm.btn}"
+                    android:text="Clear"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnClose"
+                    android:onClick="@{vm.btn}"
+                    android:text="Close"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
     <RelativeLayout
         android:elevation="6dp"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:layout_width="match_parent"
-        android:visibility="@{vm.obs.isGone?View.GONE : View.VISIBLE}"
         app:layout_visible="@{vm.obs.isGone}">
 
         <EditText
@@ -59,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/btnHis"
                     android:layout_margin="1dp"
@@ -68,7 +97,9 @@
                     android:text="His"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:onClick="@{vm.btn}"/>
+
                 <Button
                     android:id="@+id/btnClear"
                     android:layout_margin="1dp"
