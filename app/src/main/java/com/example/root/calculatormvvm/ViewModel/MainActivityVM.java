@@ -16,8 +16,6 @@ import id.gits.mvvmcore.viewmodel.GitsVM;
 public class MainActivityVM extends GitsVM{
 
     public Button.OnClickListener btn;
-
-    
     public ObservableString observableString = new ObservableString("");
 
     public MainActivityVM(Context context) {
