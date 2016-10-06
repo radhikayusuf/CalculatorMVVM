@@ -13,6 +13,7 @@ import com.example.root.calculatormvvm.Dao.HistoryDao;
 import com.example.root.calculatormvvm.Function.ConvertIdtoString;
 import com.example.root.calculatormvvm.Function.DetectInputType;
 import com.example.root.calculatormvvm.Function.MathOprator;
+import com.example.root.calculatormvvm.Function.Result;
 import com.example.root.calculatormvvm.ObservableString;
 
 
@@ -55,7 +56,7 @@ public class MainActivityVM extends GitsVM{
                     if(!obs.getValue().isEmpty()){
                         if(op == false){
                             hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
-                            obs.setValue(String.valueOf(hasilAkhir));
+                            obs.setValue(Result.resultToString(hasilAkhir));
                             System.out.println(historyDaos.get(0).getHistory());
                             op = true;
                         }else{
@@ -87,7 +88,7 @@ public class MainActivityVM extends GitsVM{
                             operation ="";
                         }else{
                         hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
-                        obs.setValue(String.valueOf(hasilAkhir));
+                        obs.setValue(Result.resultToString(hasilAkhir));
                         op = true;
                         }
                     }else if(obs.getValue().isEmpty()){
