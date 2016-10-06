@@ -52,6 +52,7 @@ public class MainActivityVM extends GitsVM{
                 if(hasilType.equals("num")){
                     obs.setValue(obs.getValue()+hasilID);
                 }else if(hasilType.equals("op")){
+                    if(!obs.getValue().isEmpty()){
                         if(op == false){
                             hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
                             obs.setValue(String.valueOf(hasilAkhir));
@@ -65,6 +66,7 @@ public class MainActivityVM extends GitsVM{
                             pos_op = obs.getValue().length();
                             System.out.println("check point "+hasilID+" ke "+obs.getValue().length());
                         }
+                    }
                 }else if(hasilType.equals("clear")){
                         obs.setValue("");
                         pos_op = 0;
@@ -113,8 +115,8 @@ public class MainActivityVM extends GitsVM{
     }
 
     @BindingAdapter({"layout_visible"})
-    public void onLayoutVisblityChange(RelativeLayout layout , String isGone){
-        if(isGone.equalsIgnoreCase("true")){
+    public static void onLayoutVisblityChange(RelativeLayout layout , Boolean isGone){
+        if(isGone){
             layout.setVisibility(View.GONE);
         }else {
             layout.setVisibility(View.VISIBLE);
