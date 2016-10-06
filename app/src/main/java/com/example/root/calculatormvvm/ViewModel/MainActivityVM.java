@@ -1,5 +1,7 @@
 package com.example.root.calculatormvvm.ViewModel;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.LinearLayoutManager;
@@ -123,9 +125,19 @@ public class MainActivityVM extends GitsVM{
     }
 
     @BindingAdapter({"layout_visible"})
-    public static void onLayoutVisblityChange(RelativeLayout layout , Boolean isGone){
+    public static void onLayoutVisblityChange(final RelativeLayout layout , Boolean isGone){
         if(isGone){
-            layout.setVisibility(View.GONE);
+            layout.animate()
+                .translationY(layout.getHeight())
+                .alpha(0.0f)
+                .setDuration(300)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                            layout.setVisibility(View.GONE);
+                        }
+                    });
         }else {
             layout.setVisibility(View.VISIBLE);
         }
