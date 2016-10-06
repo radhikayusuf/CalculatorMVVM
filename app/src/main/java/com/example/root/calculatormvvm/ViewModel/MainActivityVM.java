@@ -4,7 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.root.calculatormvvm.R;
+import com.example.root.calculatormvvm.ObservableString;
+
 
 import id.gits.mvvmcore.viewmodel.GitsVM;
 
@@ -16,9 +17,8 @@ public class MainActivityVM extends GitsVM{
 
     public Button.OnClickListener btn;
 
-
-    // ==============> Buat Classnya dlu qiel <============= //
-    //public ObservableString observableString = new ObservableString("");
+    
+    public ObservableString observableString = new ObservableString("");
 
     public MainActivityVM(Context context) {
         super(context);
