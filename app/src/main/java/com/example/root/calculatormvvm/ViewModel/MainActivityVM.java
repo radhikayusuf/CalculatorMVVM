@@ -1,9 +1,12 @@
 package com.example.root.calculatormvvm.ViewModel;
 
 import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.root.calculatormvvm.Adapter.MainActivityAdapter;
 import com.example.root.calculatormvvm.Dao.HistoryDao;
@@ -24,10 +27,11 @@ import id.gits.mvvmcore.viewmodel.GitsVM;
 
 public class MainActivityVM extends GitsVM{
 
+    public boolean isGone = false;
     public MainActivityAdapter adapter;
     public LinearLayoutManager layoutManager;
     public Button.OnClickListener btn;
-    public ObservableString obs = new ObservableString("");
+    public ObservableString obs = new ObservableString("",false);
     ConvertIdtoString convertIdtoString = new ConvertIdtoString();
     DetectInputType detectInputType = new DetectInputType();
     MathOprator mo = new MathOprator();
@@ -65,7 +69,8 @@ public class MainActivityVM extends GitsVM{
                 }else if(hasilType.equals("clear")){
                         obs.setValue("");
                 }else if(hasilType.equals("his")){
-
+                        isGone = isGone != true ? true : false;
+                        obs.setGone(isGone);
                 }else if(hasilType.equals("del")){
                         obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
                 }else if(hasilType.equals("res")){
@@ -101,5 +106,14 @@ public class MainActivityVM extends GitsVM{
         historyDaos.add(new HistoryDao(num1+" "+(operation.equals("*") ? "x" : operation)+" "+num2+ " = " +String.valueOf(hasil)));
         adapter.notifyDataSetChanged();
         return hasil;
+    }
+
+    @BindingAdapter({"layout_visible"})
+    public void onLayoutVisblityChange(RelativeLayout layout , Boolean isGone){
+        if(isGone){
+            layout.setVisibility(View.GONE);
+        }else {
+            layout.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -9,9 +9,19 @@ import android.databinding.Bindable;
 
 public class ObservableString extends BaseObservable {
     public String value;
+    public boolean isGone;
 
-    public ObservableString(String value) {
+    public ObservableString(String value, boolean isGone) {
         this.value = value;
+        this.isGone = isGone;
+    }
+
+    public boolean isGone() {
+        return isGone;
+    }
+
+    public void setGone(boolean gone) {
+        isGone = gone;
     }
 
     @Bindable
