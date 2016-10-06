@@ -23,7 +23,7 @@ public class ObservableString extends BaseObservable {
 
     public void setGone(boolean gone) {
         isGone = gone;
-        notifyPropertyChanged(BR.isGone);
+        notifyPropertyChanged(BR.gone);
     }
 
     @Bindable
