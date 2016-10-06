@@ -66,10 +66,12 @@ public class MainActivityVM extends GitsVM{
                 }else if(hasilType.equals("op")){
                     if(!obs.getValue().isEmpty()){
                         if(op == false){
-                            hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
-                            obs.setValue(Result.resultToString(hasilAkhir));
-                            System.out.println(historyDaos.get(0).getHistory());
-                            op = true;
+                            if(!isOperation(obs.getValue())) {
+                                hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
+                                obs.setValue(Result.resultToString(hasilAkhir));
+                                System.out.println(historyDaos.get(0).getHistory());
+                                op = true;
+                            }
                         }else{
                             System.out.println("ini"+hasilID);
                             operation = hasilID;
@@ -92,12 +94,18 @@ public class MainActivityVM extends GitsVM{
                         historyDaos.clear();
                         adapter.notifyDataSetChanged();
                 }else if(hasilType.equals("del")){
-                    if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == 'x' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
-                        pos_op = 0;
-                        operation = "";
-                        op = true;
+                    if(!obs.getValue().isEmpty()){
+                        if(isOperation(obs.getValue())){
+                            obs.setValue(obs.getValue().substring(0, obs.getValue().length() - 1));
+                            pos_op = 0;
+                            operation = "";
+                            op = true;
+                        }else{
+                            obs.setValue(obs.getValue().substring(0, obs.getValue().length() - 1));
+                        }
                     }
-                        obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
+                        //obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
+
                 }else if(hasilType.equals("res")){
                     if(!operation.isEmpty()){
                         if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == 'x' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
