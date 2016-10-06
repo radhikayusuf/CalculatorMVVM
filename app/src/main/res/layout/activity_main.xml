@@ -22,7 +22,6 @@
         android:layout_marginTop="150dp"
         android:maxLines="1"
         android:paddingRight="10dp"
-        android:textDirection="rtl"
         android:id="@+id/etInput"
         android:text="@={vm.obs.value}"
         android:textSize="50dp"
