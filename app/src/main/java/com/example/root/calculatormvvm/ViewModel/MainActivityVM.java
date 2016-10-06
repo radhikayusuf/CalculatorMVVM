@@ -113,8 +113,8 @@ public class MainActivityVM extends GitsVM{
     }
 
     @BindingAdapter({"layout_visible"})
-    public void onLayoutVisblityChange(RelativeLayout layout , Boolean isGone){
-        if(isGone){
+    public void onLayoutVisblityChange(RelativeLayout layout , String isGone){
+        if(isGone.equalsIgnoreCase("true")){
             layout.setVisibility(View.GONE);
         }else {
             layout.setVisibility(View.VISIBLE);
