@@ -54,7 +54,7 @@ public class MainActivityVM extends GitsVM{
 
                 if(hasilType.equals("num")){
                     if(hasilID.equalsIgnoreCase(".")){
-                        if(obs.getValue().charAt(obs.getValue().length()-1) == '.'){
+                        if(!obs.getValue().isEmpty() && obs.getValue().charAt(obs.getValue().length()-1) == '.'){
                             hasilID="";
                         }else if(obs.getValue().toString().equalsIgnoreCase("")){
                             hasilID="0.";
@@ -137,6 +137,14 @@ public class MainActivityVM extends GitsVM{
         adapter.notifyDataSetChanged();
         operation = "";
         return hasil;
+    }
+
+    public Boolean isOperation(String value) {
+    if (value.charAt(obs.getValue().length() - 1) == '+' || value.charAt(obs.getValue().length() - 1) == '-' || value.charAt(obs.getValue().length() - 1) == 'x' || value.charAt(obs.getValue().length() - 1) == '/') {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @BindingAdapter({"layout_visible"})
