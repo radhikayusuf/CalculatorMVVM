@@ -2,7 +2,10 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
 <data>
-
+    <import type="android.view.View"/>
+    <variable
+        name="his"
+        type="com.example.root.calculatormvvm.ViewModel.HistoryVM"/>
 </data>
 
 <LinearLayout
@@ -11,6 +14,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="5 x 5 = 25"/>
+        android:text="@{his.bHistoryName}"/>
 </LinearLayout>
 </layout>
