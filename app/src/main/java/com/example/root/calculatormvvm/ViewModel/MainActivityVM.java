@@ -62,9 +62,10 @@ public class MainActivityVM extends GitsVM{
                             System.out.println(historyDaos.get(0).getHistory());
                             op = true;
                         }else{
+                            System.out.println("ini"+hasilID);
                             operation = hasilID;
                             num_buff = obs.getValue();
-                            obs.setValue(obs.getValue()+hasilID);
+                            obs.setValue(obs.getValue()+(hasilID.equals("*") ? "x" : hasilID));
                             op = false;
                             pos_op = obs.getValue().length();
                             System.out.println("check point "+hasilID+" ke "+obs.getValue().length());
@@ -82,10 +83,15 @@ public class MainActivityVM extends GitsVM{
                         historyDaos.clear();
                         adapter.notifyDataSetChanged();
                 }else if(hasilType.equals("del")){
+                    if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == 'x' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
+                        pos_op = 0;
+                        operation = "";
+                        op = true;
+                    }
                         obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
                 }else if(hasilType.equals("res")){
                     if(!operation.isEmpty()){
-                        if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == '*' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
+                        if(obs.getValue().charAt(obs.getValue().length() -1) == '+' || obs.getValue().charAt(obs.getValue().length() -1) == '-' || obs.getValue().charAt(obs.getValue().length() -1) == 'x' || obs.getValue().charAt(obs.getValue().length() -1) == '/'){
                             obs.setValue(obs.getValue().substring(0,obs.getValue().length() -1));
                             operation ="";
                         }else{
@@ -118,7 +124,7 @@ public class MainActivityVM extends GitsVM{
             hasil = mo.oprasiKurang(num1, num2);
         }
 
-        historyDaos.add(0, new HistoryDao(num1+" "+(operation.equals("*") ? "x" : operation)+" "+num2+ " = " +String.valueOf(hasil)));
+        historyDaos.add(0, new HistoryDao(Result.resultToString(num1)+" "+(operation.equals("*") ? "x" : operation)+" "+Result.resultToString(num2)+ " = " +Result.resultToString(hasil)));
         adapter.notifyDataSetChanged();
         operation = "";
         return hasil;
