@@ -35,6 +35,7 @@ public class MainActivityVM extends GitsVM{
     String operation = "", num_buff="", num_after="";
     int pos_op= 0;
     List<HistoryDao> historyDaos = new ArrayList<>();
+    double hasilAkhir = 0;
 
     public MainActivityVM(Context context) {
         super(context);
@@ -49,10 +50,10 @@ public class MainActivityVM extends GitsVM{
                 }else if(hasilType.equals("op")){
                         if(op == false){
                             System.out.println("check point 1");
-                            double hasil = mo.oprasiKali(Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
-                            historyDaos.add(new HistoryDao(num_buff+(operation.equals("*") ? "x" : operation)+obs.getValue().substring(pos_op, obs.getValue().length()) + " = " +String.valueOf(hasil)));
-                            obs.setValue(String.valueOf(hasil));
+                            hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
+                            obs.setValue(String.valueOf(hasilAkhir));
                             System.out.println(historyDaos.get(0).getHistory());
+                            op = true;
                         }else{
                             operation = hasilID;
                             num_buff = obs.getValue();
@@ -68,11 +69,37 @@ public class MainActivityVM extends GitsVM{
                 }else if(hasilType.equals("del")){
                         obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
                 }else if(hasilType.equals("res")){
+                    if(!operation.isEmpty()){
+                        hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
+                        obs.setValue(String.valueOf(hasilAkhir));
+                    }else if(obs.getValue().charAt(obs.getValue().length()) == '+' || obs.getValue().charAt(obs.getValue().length()) == '-' || obs.getValue().charAt(obs.getValue().length()) == '*' || obs.getValue().charAt(obs.getValue().length()) == '/'){
+                        obs.setValue(obs.getValue().substring(0,obs.getValue().length() -1));
+
+                    }
 
                 }
             }
         };
         adapter = new MainActivityAdapter(historyDaos);
         layoutManager = new LinearLayoutManager(context);
+    }
+
+
+    public Double hitung(String o, double num1, double num2){
+        double hasil = 0;
+
+        if (o.equals("*")){
+            hasil = mo.oprasiKali(num1, num2);
+        }else if (o.equals("/")){
+            hasil = mo.oprasiBagi(num1, num2);
+        }else if (o.equals("+")){
+            hasil = mo.oprasiTambah(num1, num2);
+        }else if (o.equals("-")){
+            hasil = mo.oprasiKurang(num1, num2);
+        }
+
+        historyDaos.add(new HistoryDao(num1+" "+(operation.equals("*") ? "x" : operation)+" "+num2+ " = " +String.valueOf(hasil)));
+        adapter.notifyDataSetChanged();
+        return hasil;
     }
 }
