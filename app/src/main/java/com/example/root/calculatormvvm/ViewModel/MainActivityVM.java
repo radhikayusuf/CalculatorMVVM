@@ -1,6 +1,10 @@
 package com.example.root.calculatormvvm.ViewModel;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.Button;
+
+import com.example.root.calculatormvvm.R;
 
 import id.gits.mvvmcore.viewmodel.GitsVM;
 
@@ -9,7 +13,20 @@ import id.gits.mvvmcore.viewmodel.GitsVM;
  */
 
 public class MainActivityVM extends GitsVM{
+
+    public Button.OnClickListener btn;
+
+
+    // ==============> Buat Classnya dlu qiel <============= //
+    //public ObservableString observableString = new ObservableString("");
+
     public MainActivityVM(Context context) {
         super(context);
+        btn = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
     }
 }
