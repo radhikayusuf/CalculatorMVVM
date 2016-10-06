@@ -7,7 +7,7 @@ import com.example.root.calculatormvvm.ViewModel.MainActivityVM;
 import com.example.root.calculatormvvm.databinding.ActivityMainBinding;
 
 import id.gits.mvvmcore.activity.GitsActivity;
-
+//test aqiel
 public class MainActivity extends GitsActivity<MainActivityVM, ActivityMainBinding> {
 
 
