@@ -24,6 +24,8 @@ public class DetectInputType {
             case "=": return "res";
             case "clear": return "clear";
             case "his": return "his";
+            case "chis": return "chis";
+            case "close": return "his";
             case "del": return "del";
             case ".": return "num";
             default:return "none";

@@ -29,9 +29,11 @@
             app:layoutManager="@{vm.layoutManager}"
             app:adapter="@{vm.adapter}"/>
         <RelativeLayout
+            android:layout_alignParentBottom="true"
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_visible="@{vm.obs.isGone?true:false}">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +54,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </RelativeLayout>
-
     </RelativeLayout>
     <RelativeLayout
         android:elevation="6dp"

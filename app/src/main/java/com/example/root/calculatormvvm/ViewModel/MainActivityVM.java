@@ -75,6 +75,9 @@ public class MainActivityVM extends GitsVM{
                 }else if(hasilType.equals("his")){
                         isGone = isGone != true ? true : false;
                         obs.setGone(isGone);
+                }else if(hasilType.equals("chis")){
+                        historyDaos.clear();
+                        adapter.notifyDataSetChanged();
                 }else if(hasilType.equals("del")){
                         obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
                 }else if(hasilType.equals("res")){

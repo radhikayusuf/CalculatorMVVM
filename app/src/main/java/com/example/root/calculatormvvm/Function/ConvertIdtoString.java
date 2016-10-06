@@ -28,6 +28,8 @@ public class ConvertIdtoString {
             case R.id.btnEquals: return "=";
             case R.id.btnDot: return ".";
             case R.id.btnDel: return "del";
+            case R.id.btnClearHis: return "chis";
+            case R.id.btnClose: return "close";
             case R.id.btnClear: return "clear";
             case R.id.btnHis: return "his";
             default: return "none";
