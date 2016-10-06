@@ -9,11 +9,16 @@
 </data>
 
 <LinearLayout
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:padding="10dp"
+    android:background="#424242"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{his.bHistoryName}"/>
+        android:text="@{his.bHistoryName}"
+        android:textColor="#fff"/>
 </LinearLayout>
 </layout>

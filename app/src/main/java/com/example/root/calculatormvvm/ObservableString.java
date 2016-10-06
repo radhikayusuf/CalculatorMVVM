@@ -16,12 +16,14 @@ public class ObservableString extends BaseObservable {
         this.isGone = isGone;
     }
 
+    @Bindable
     public boolean isGone() {
         return isGone;
     }
 
     public void setGone(boolean gone) {
         isGone = gone;
+        notifyPropertyChanged(BR.isGone);
     }
 
     @Bindable

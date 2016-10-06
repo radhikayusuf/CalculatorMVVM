@@ -53,7 +53,6 @@ public class MainActivityVM extends GitsVM{
                     obs.setValue(obs.getValue()+hasilID);
                 }else if(hasilType.equals("op")){
                         if(op == false){
-                            System.out.println("check point 1");
                             hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
                             obs.setValue(String.valueOf(hasilAkhir));
                             System.out.println(historyDaos.get(0).getHistory());
@@ -68,6 +67,9 @@ public class MainActivityVM extends GitsVM{
                         }
                 }else if(hasilType.equals("clear")){
                         obs.setValue("");
+                        pos_op = 0;
+                        operation = "";
+                        op = true;
                 }else if(hasilType.equals("his")){
                         isGone = isGone != true ? true : false;
                         obs.setGone(isGone);
@@ -77,6 +79,7 @@ public class MainActivityVM extends GitsVM{
                     if(!operation.isEmpty()){
                         hasilAkhir = hitung(operation, Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
                         obs.setValue(String.valueOf(hasilAkhir));
+                        op = true;
                     }else if(obs.getValue().charAt(obs.getValue().length()) == '+' || obs.getValue().charAt(obs.getValue().length()) == '-' || obs.getValue().charAt(obs.getValue().length()) == '*' || obs.getValue().charAt(obs.getValue().length()) == '/'){
                         obs.setValue(obs.getValue().substring(0,obs.getValue().length() -1));
 
@@ -103,8 +106,9 @@ public class MainActivityVM extends GitsVM{
             hasil = mo.oprasiKurang(num1, num2);
         }
 
-        historyDaos.add(new HistoryDao(num1+" "+(operation.equals("*") ? "x" : operation)+" "+num2+ " = " +String.valueOf(hasil)));
+        historyDaos.add(0, new HistoryDao(num1+" "+(operation.equals("*") ? "x" : operation)+" "+num2+ " = " +String.valueOf(hasil)));
         adapter.notifyDataSetChanged();
+        operation = "";
         return hasil;
     }
 
