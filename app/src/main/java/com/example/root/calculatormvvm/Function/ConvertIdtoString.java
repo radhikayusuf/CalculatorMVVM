@@ -7,7 +7,7 @@ import android.view.View;
  */
 
 public class ConvertIdtoString {
-    public static void convertIdtoString(View v){
+    public static String convertIdtoString(View v){
         switch (v.getId()){
 
         }
