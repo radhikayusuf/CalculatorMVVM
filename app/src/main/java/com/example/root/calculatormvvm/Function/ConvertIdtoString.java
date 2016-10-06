@@ -9,7 +9,7 @@ import android.view.View;
 public class ConvertIdtoString {
     public static String convertIdtoString(View v){
         switch (v.getId()){
-
+            default: return "";
         }
     }
 }
