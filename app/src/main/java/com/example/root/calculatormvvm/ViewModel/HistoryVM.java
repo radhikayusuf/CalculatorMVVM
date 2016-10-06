@@ -14,7 +14,7 @@ import id.gits.mvvmcore.viewmodel.GitsVM;
  */
 
 public class HistoryVM extends GitsRowVM<HistoryDao,CardHistoryBinding>{
-    ObservableField<String> bHistoryName = new ObservableField<>();
+    public ObservableField<String> bHistoryName = new ObservableField<>();
     public HistoryVM(Context context, CardHistoryBinding binding, HistoryDao data) {
         super(context, binding, data);
         bHistoryName.set(data.getHistory());

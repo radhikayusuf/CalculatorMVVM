@@ -4,10 +4,15 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.root.calculatormvvm.Dao.HistoryDao;
 import com.example.root.calculatormvvm.Function.ConvertIdtoString;
 import com.example.root.calculatormvvm.Function.DetectInputType;
+import com.example.root.calculatormvvm.Function.MathOprator;
 import com.example.root.calculatormvvm.ObservableString;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import id.gits.mvvmcore.viewmodel.GitsVM;
 
@@ -21,7 +26,11 @@ public class MainActivityVM extends GitsVM{
     public ObservableString obs = new ObservableString("");
     ConvertIdtoString convertIdtoString = new ConvertIdtoString();
     DetectInputType detectInputType = new DetectInputType();
+    MathOprator mo = new MathOprator();
     boolean op = true;
+    String operation = "", num_buff="", num_after="";
+    int pos_op= 0;
+    List<HistoryDao> historyDaos = new ArrayList<>();
 
     public MainActivityVM(Context context) {
         super(context);
@@ -34,13 +43,19 @@ public class MainActivityVM extends GitsVM{
                 if(hasilType.equals("num")){
                     obs.setValue(obs.getValue()+hasilID);
                 }else if(hasilType.equals("op")){
-                    int x = obs.getValue().length() - 1;
                         if(op == false){
                             System.out.println("check point 1");
+                            double hasil = mo.oprasiKali(Double.parseDouble(num_buff), Double.parseDouble(obs.getValue().substring(pos_op, obs.getValue().length())));
+                            historyDaos.add(new HistoryDao(num_buff+(operation.equals("*") ? "x" : operation)+obs.getValue().substring(pos_op, obs.getValue().length()) + " = " +String.valueOf(hasil)));
+                            obs.setValue(String.valueOf(hasil));
+                            System.out.println(historyDaos.get(0).getHistory());
                         }else{
+                            operation = hasilID;
+                            num_buff = obs.getValue();
                             obs.setValue(obs.getValue()+hasilID);
                             op = false;
-                            System.out.println("check point");
+                            pos_op = obs.getValue().length();
+                            System.out.println("check point "+hasilID+" ke "+obs.getValue().length());
                         }
                 }else if(hasilType.equals("clear")){
                         obs.setValue("");

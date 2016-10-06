@@ -5,7 +5,7 @@ package com.example.root.calculatormvvm.Dao;
  */
 
 public class HistoryDao {
-    String History;
+    public String History;
 
     public HistoryDao(String history) {
         History = history;
