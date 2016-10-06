@@ -24,7 +24,7 @@
         android:paddingRight="10dp"
         android:textDirection="rtl"
         android:id="@+id/etInput"
-        android:text="@={vm.observableString.value}"
+        android:text="@={vm.obs.value}"
         android:textSize="50dp"
         android:layout_width="match_parent"
         android:layout_height="80dp"

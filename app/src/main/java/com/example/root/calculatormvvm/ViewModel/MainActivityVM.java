@@ -18,10 +18,10 @@ import id.gits.mvvmcore.viewmodel.GitsVM;
 public class MainActivityVM extends GitsVM{
 
     public Button.OnClickListener btn;
-    public ObservableString observableString = new ObservableString("");
+    public ObservableString obs = new ObservableString("");
     ConvertIdtoString convertIdtoString = new ConvertIdtoString();
     DetectInputType detectInputType = new DetectInputType();
-
+    boolean op = true;
 
     public MainActivityVM(Context context) {
         super(context);
@@ -32,15 +32,22 @@ public class MainActivityVM extends GitsVM{
                 String hasilType = detectInputType.detectInputType(hasilID);
 
                 if(hasilType.equals("num")){
-                    observableString.setValue(observableString.getValue()+hasilID);
+                    obs.setValue(obs.getValue()+hasilID);
                 }else if(hasilType.equals("op")){
-                    observableString.setValue(observableString.getValue()+hasilID);
+                    int x = obs.getValue().length() - 1;
+                        if(op == false){
+                            System.out.println("check point 1");
+                        }else{
+                            obs.setValue(obs.getValue()+hasilID);
+                            op = false;
+                            System.out.println("check point");
+                        }
                 }else if(hasilType.equals("clear")){
-
+                        obs.setValue("");
                 }else if(hasilType.equals("his")){
 
                 }else if(hasilType.equals("del")){
-
+                        obs.setValue(obs.getValue().length() > 0 ? obs.getValue().substring(0 , obs.getValue().length()-1) : "");
                 }else if(hasilType.equals("res")){
 
                 }
